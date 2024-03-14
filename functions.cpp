@@ -15,12 +15,12 @@ vector<vector<int>> GerarListaAdjacencia(int n, vector<pair<int,int>>edges){
     return ListAdj;
 }
 
-// verificar se o grafo possui um conjunto IPD v·lido dado o vetor colour
-/* em cada posiÁ„o do vetor colour pode ter o valor 1 (aquela aresta faz parte do conjunto IPD), 
-valor 2 (aquela aresta È vizinha a algum vÈrtice que faz parte do conjunto IPD),
-ou valor 0, caso n„o seja uma aresta indicada pelo valor 1 e pelo valor 2
+// verificar se o grafo possui um conjunto IPD v√°lido dado o vetor colour
+/* em cada posi√ß√£o do vetor colour pode ter o valor 1 (aquela aresta faz parte do conjunto IPD), 
+valor 2 (aquela aresta √© vizinha a algum v√©rtice que faz parte do conjunto IPD),
+ou valor 0, caso n√£o seja uma aresta indicada pelo valor 1 e pelo valor 2
 */
-// Assim, se um grafo algum vertice com valor 0 no vetor colour, significa que o conjunto IPD dado n„o È v·lido
+// Assim, se um grafo algum vertice com valor 0 no vetor colour, significa que o conjunto IPD dado n√£o √© v√°lido
 int verifica_conj(int n, vector<int>&colour){
     int cont=0;
     bool ok=1;
@@ -60,22 +60,22 @@ pair<int,int> qt_K1_K2(int n, vector<int>&colour, vector<vector<int>> &ListAdj){
 int ans=inf; // ans com valor suficientemente grande;
 long long chamadas=0;
 
-// funcao que encontra menor n˙mero de ipd v·lido para o grafo dado na entrada atravÈs da lista de adjacencia 
-// v È o vÈrtice atual que a funcao esta trabalhando e n È o n˙mero de vÈrtices total
+// funcao que encontra menor n√∫mero de ipd v√°lido para o grafo dado na entrada atrav√©s da lista de adjacencia 
+// v √© o v√©rtice atual que a funcao esta trabalhando e n √© o n√∫mero de v√©rtices total
 void ipd(int v, int n, vector<vector<int>> &ListAdj, vector<int> &colour, int &ans){
     if(v==n+1){
         ans=min(ans, verifica_conj(n, colour));
         return;
     }
 
-    // se colour[v]==1 È pq o vÈrtice v faz - no estado atual - parte do conjunto IPD (conjunto dominante emparelhado induzido)
-    // se colour[v]==2 È pq o vÈrtice v n„o pode fazer parte do conjunto S, por causa da definiÁ„o de conjunto IPD
+    // se colour[v]==1 √© pq o v√©rtice v faz - no estado atual - parte do conjunto IPD (conjunto dominante emparelhado induzido)
+    // se colour[v]==2 √© pq o v√©rtice v n√£o pode fazer parte do conjunto S, por causa da defini√ß√£o de conjunto IPD
     if(colour[v]){
         ipd(v+1,  n, ListAdj, colour,ans);
         return;
     }
 
-    //caso em que vamos, se possÌvel, adicionar v e um de seus vizinhos no conjunto IPD
+    //caso em que vamos, se poss√≠vel, adicionar v e um de seus vizinhos no conjunto IPD
     colour[v]=1;
     // cout<<"v="<<v<< " eh 1\n";
     int u, w, ni,nj; 
@@ -116,25 +116,25 @@ void ipd(int v, int n, vector<vector<int>> &ListAdj, vector<int> &colour, int &a
     
 }
 
-// funcao que encontra menor n˙mero de yoind v·lido para o grafo dado na entrada atravÈs da lista de adjacencia 
-// v È o vÈrtice atual que a funcao esta trabalhando e n È o n˙mero de vÈrtices total
-void yoind(int v, int n, vector<vector<int>> &ListAdj, vector<int> &colour, int &ans){
+// funcao que encontra menor n√∫mero de OIND v√°lido para o grafo dado na entrada atrav√©s da lista de adjacencia 
+// v √© o v√©rtice atual que a funcao esta trabalhando e n √© o n√∫mero de v√©rtices total
+void OIND(int v, int n, vector<vector<int>> &ListAdj, vector<int> &colour, int &ans){
     if(v==n+1){
         ans=min(ans, verifica_conj(n, colour));
         return;
     }
 
-    // se colour[v]==1 È pq o vÈrtice v faz - no estado atual - parte do conjunto yoind (conjunto dominante emparelhado induzido)
-    // se colour[v]==2 È pq o vÈrtice v n„o pode fazer parte do conjunto S, por causa da definiÁ„o de conjunto yoind
+    // se colour[v]==1 √© pq o v√©rtice v faz - no estado atual - parte do conjunto OIND (conjunto dominante emparelhado induzido)
+    // se colour[v]==2 √© pq o v√©rtice v n√£o pode fazer parte do conjunto S, por causa da defini√ß√£o de conjunto OIND
     if(colour[v]){
-        yoind(v+1,  n, ListAdj, colour,ans);
+        OIND(v+1,  n, ListAdj, colour,ans);
         return;
     }
 
     vector<int>aux;
     int u, w; 
 
-    //caso em que vamos, se possÌvel, adicionar v e um de seus vizinhos no conjunto yoind
+    //caso em que vamos, se poss√≠vel, adicionar v e um de seus vizinhos no conjunto OIND
     colour[v]=1;
 
     // caso em que v faz parte de um K1
@@ -146,7 +146,7 @@ void yoind(int v, int n, vector<vector<int>> &ListAdj, vector<int> &colour, int 
             colour[u]=2;
         }
     }
-    yoind(v+1, n, ListAdj, colour, ans);
+    OIND(v+1, n, ListAdj, colour, ans);
 
     // voltando ao estado anterir
     for (int j = 0; j < aux.size(); j++)
@@ -177,7 +177,7 @@ void yoind(int v, int n, vector<vector<int>> &ListAdj, vector<int> &colour, int 
                 aux.push_back(w);
             }
         }
-        yoind(v+1,  n, ListAdj, colour, ans);
+        OIND(v+1,  n, ListAdj, colour, ans);
         colour[u]=0;
         for (int j = 0; j < aux.size(); j++)
         {
@@ -187,13 +187,13 @@ void yoind(int v, int n, vector<vector<int>> &ListAdj, vector<int> &colour, int 
     // voltando v ao estado anterior
     colour[v]=0;
 
-    //caso em que nao vamos adicionar v no conjunto yoind
-    yoind(v+1,  n, ListAdj, colour, ans);
+    //caso em que nao vamos adicionar v no conjunto OIND
+    OIND(v+1,  n, ListAdj, colour, ans);
     
 }
 
 pair<int,int> find_almost_paired(int v, int n, vector<vector<int>> &ListAdj, vector<int> &colour){
-    // ans.firt È a qt de K1 e ans.second È a qtd de K2
+    // ans.firt √© a qt de K1 e ans.second √© a qtd de K2
     pair<int,int> ans = {inf,inf}, resp_atual;
     if(v==n+1){
         resp_atual=qt_K1_K2(n, colour, ListAdj);
@@ -202,8 +202,8 @@ pair<int,int> find_almost_paired(int v, int n, vector<vector<int>> &ListAdj, vec
         return ans;
     }
 
-    // se colour[v]==1 È pq o vÈrtice v faz - no estado atual - parte do conjunto yoind (conjunto dominante emparelhado induzido)
-    // se colour[v]==2 È pq o vÈrtice v n„o pode fazer parte do conjunto S, por causa da definiÁ„o de conjunto yoind
+    // se colour[v]==1 √© pq o v√©rtice v faz - no estado atual - parte do conjunto OIND (conjunto dominante emparelhado induzido)
+    // se colour[v]==2 √© pq o v√©rtice v n√£o pode fazer parte do conjunto S, por causa da defini√ß√£o de conjunto OIND
     if(colour[v]){
         return find_almost_paired(v+1,  n, ListAdj, colour);
     }
@@ -211,7 +211,7 @@ pair<int,int> find_almost_paired(int v, int n, vector<vector<int>> &ListAdj, vec
     vector<int>aux;
     int u, w; 
 
-    //caso em que vamos, se possÌvel, adicionar v e um de seus vizinhos no conjunto yoind
+    //caso em que vamos, se poss√≠vel, adicionar v e um de seus vizinhos no conjunto OIND
     colour[v]=1;
 
     // caso em que v faz parte de um K1
@@ -266,7 +266,7 @@ pair<int,int> find_almost_paired(int v, int n, vector<vector<int>> &ListAdj, vec
     // voltando v ao estado anterior
     colour[v]=0;
 
-    //caso em que nao vamos adicionar v no conjunto yoind
+    //caso em que nao vamos adicionar v no conjunto OIND
     resp_atual = find_almost_paired(v+1,  n, ListAdj, colour);
     if(resp_atual.first<ans.first || 
             (resp_atual.first == ans.first && resp_atual.second<ans.second)) ans=resp_atual;
@@ -316,9 +316,10 @@ vector<pair<int,int>> GerarEdgesProdLexicografico (int n, vector<vector<int>> &L
 }
 
 void ReadAdjMatrix(int &n, vector<vector<int>> &ListAdj, int &qtEdges){
-    // this function read connected graph givin the adjacency matrix
+    // this function read connected graph givin the number of vetex and the adjacency matrix
 
     /* exemple:
+    7
     0111100
     1011011
     1100111
@@ -344,6 +345,78 @@ void ReadAdjMatrix(int &n, vector<vector<int>> &ListAdj, int &qtEdges){
         }
     }
     qtEdges/=2;
+}
+
+int ReadAdjMatrix2(int &n, vector<vector<int>> &ListAdj, int &qtEdges){
+    // this function read many connected graphs givin the adjacency matrix ( in the input, the number of vetex is not given)
+    // it function returns 0 if the input is end of line, 2 if is a line break, 1 otherwise 
+
+    /* exemple:
+
+    0 1 1 1
+    1 0 1 1
+    1 1 0 1
+    1 1 1 0
+
+    0 0 0 0 0 0
+    1 0 0 0 1 1
+    1 0 0 0 1 1
+    1 0 0 0 1 1
+    0 1 1 1 0 0
+    1 1 1 1 0 1
+    */
+
+    vector<int>Matrix;
+    stringstream s;
+    string digito, input;
+
+    qtEdges=0; // This variable will give us the number of edges in the graph
+    int i=1; // i and j will save the current vertex
+    n = 0; // the number of vertex
+
+    while(true){
+        // End of file
+        if(!getline(cin, input)){ // reading all line in input
+            return 0;
+        }
+        // Line break
+        if(input.empty()==1){ // if the input is a line break
+            // if the graph was not provided, that is just a line below another line
+            if(i==1){
+                n=0;
+                return 2;
+            }
+            // the reading of the graph is over
+            else{
+                break;
+            }
+        }
+
+        s.clear();
+        s << input; // s takes all content of input
+
+        ListAdj.resize(i+1); 
+
+        int j=1;
+        while(s.eof()!=1){ // while s is not empty
+            digito.clear();
+            s >> digito; // digit takes the first caracter of s
+            if(digito.empty()) continue;
+            // cout<<digito <<" - ";
+            if(digito == "1"){ // if i-j is a edge
+                ListAdj[i].push_back(j);
+                qtEdges++;
+            }   
+            j++;  
+        }
+        // cout<<"\n";
+        n=i; // n takes the content of i, that is the current number of vertex 
+        i++;
+    }
+    cout<<"\n";
+
+    qtEdges/=2; // the graph is not directed, then the edges are duplicated
+    return 1;
 }
 
 // this function read the number of vertices, the number of edges and ,for each edge, it is read the neighbors a-b
