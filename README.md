@@ -1,8 +1,8 @@
 # Graph-parameters-Lexicographic-Product
 
-This code was developed to help me in my research, so I can do tests in a lot of graphs to find the minimum cardinality of the OIND-set.
+This code was developed to help me in my research, so I can do tests in a lot of graphs to find the minimum cardinality of the OIND-set. The algorithms were made using backtracking technique.
 
-The purpuse of the code is basically 
+The purpuse of the code is basically:
 * Find minimum cardinality of a IPD-set, i.e, the minimun cardinality of a open-independent and open-dominating set;
 * Find minimum cardinality of a OIND-set, i.e, the minimun cardinality of a dominating and open-independent set in Graphs (also in Lexicographic Product).
 
