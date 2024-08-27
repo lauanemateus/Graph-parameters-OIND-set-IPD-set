@@ -1,6 +1,8 @@
 # Graph-parameters-Lexicographic-Product
 
-This code was developed to help me in my research, so I can do tests in a lot of graphs to find the minimum cardinality of the OIND-set. The algorithms were made using backtracking technique.
+This repository contains code developed to support my research on graphs, specifically in the analysis of Open Independent Dominating Sets (OIND).
+
+The algorithms were implemented using the backtracking technique. This code is a crucial tool for validating hypotheses and experiments in my research, enabling advancements in graph theory and the understanding of OIND sets.
 
 The purpuse of the code is basically:
 * Find minimum cardinality of a IPD-set, i.e, the minimun cardinality of a open-independent and open-dominating set;
