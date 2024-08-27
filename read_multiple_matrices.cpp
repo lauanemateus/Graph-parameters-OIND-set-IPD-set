@@ -1,6 +1,6 @@
-// Esse código é para ler entradas de várias matriz de adjacência que não possuem numero de vertices indicado
-// Mostra o conjunto IPD, ou o mínimo de vértices problemas caso um grafo não admita conjunto IPD
-// Mostra o conjunto OIND
+// This code is for reading inputs from various adjacency matrices that do not have the number of vertices indicated
+// Displays the IPD set, or the minimum number of K1 vertices needed to dominate the graph.
+// Displays the OIND set
 
 #include "library.hpp"
 
