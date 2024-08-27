@@ -3,7 +3,7 @@
     v1 v2
     v3 v4
     ...
-    vi vj
+    vn vm
 */
 
 // Consider that IPD is the induced paired dominating set of a graph
