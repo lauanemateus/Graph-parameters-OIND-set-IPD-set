@@ -1,6 +1,6 @@
 # Graph-parameters-Lexicographic-Product
 
-This repository contains code developed to support my research on graphs, specifically in the analysis of Open Independent Dominating Sets (OIND).
+This repository contains code developed to support my [research on graphs](papers/Iniciação_Científica_Lauane.pdf), specifically in the analysis of Open Independent Dominating Sets (OIND).
 
 The algorithms were implemented using the backtracking technique. This code is a crucial tool for validating hypotheses and experiments in my research, enabling advancements in graph theory and the understanding of OIND sets.
 
